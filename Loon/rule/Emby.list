@@ -1,0 +1,28 @@
+# 内容：Emby分流
+
+DOMAIN-KEYWORD,embycf
+
+# 威威
+DOMAIN-SUFFIX,embyvip.org
+# pilipili
+DOMAIN-SUFFIX,emby77.org
+DOMAIN-SUFFIX,pilipiliultra.top
+DOMAIN-SUFFIX,pilipiliultra.com
+# ACA
+DOMAIN,emby.aca.best
+DOMAIN,porn.aca.best
+
+# bgm 域名
+DOMAIN-SUFFIX,bangumi.tv
+DOMAIN-SUFFIX,bgm.tv
+DOMAIN-SUFFIX,bangumi.online
+
+# 观影相关域名
+# 刮削
+DOMAIN-SUFFIX,themoviedb.org
+DOMAIN-SUFFIX,tmdb.org
+DOMAIN-SUFFIX,thetvdb.com
+DOMAIN-SUFFIX,fanart.tv
+
+# emby社区
+DOMAIN-SUFFIX,emby.media

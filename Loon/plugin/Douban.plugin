@@ -1,0 +1,14 @@
+#!name=豆瓣开屏广告屏蔽
+#!desc=豆瓣开屏广告屏蔽，只能屏蔽开屏，后期还要改duration
+#!author=honue
+#!homepage=https://github.com/honue/rules
+#!icon=https://raw.githubusercontent.com/honue/rules/master/img/douban.png
+[Rule]
+
+[URL Rewrite]
+^https?:\/\/api\.douban\.com\/v2\/app_ads.+ reject
+# ^https?:\/\/api\.douban\.com\/v2\/app_ads\/splash_preload reject
+# ^https?:\/\/api\.douban\.com\/v2\/app_ads\/splash_show reject
+
+[MITM]
+hostname = api.douban.com
