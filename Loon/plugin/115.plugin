@@ -1,0 +1,11 @@
+#!name=115网盘cookie
+#!desc=从小程序获取cookie
+#!author=honue
+#!homepage=https://github.com/honue/rules
+[Rule]
+
+[Script]
+http-request ^https?:\/\/vip\.115\.com\/\?ct=order&ac=coupon&app_type script-path=https://115.js, tag=115网盘cookie
+
+[MITM]
+hostname = vip.115.com
