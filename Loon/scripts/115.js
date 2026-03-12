@@ -1,20 +1,70 @@
-var obj = $request.headers;
+/*
+【115 Cookie获取】@honue
 
-// 输出看看 obj 是否包含 cookie
-console.log(obj.cookie);
+【仓库地址】https://github.com/honue/rules
+
+【Loon】
+-----------------
+[Script]
+http-request ^https:\/\/passportapi\.115\.com\/app\/\d+\.\d+\/[^\/]+\/\d+\.\d+\.\d+\/login_log\/login_devices tag=115_cookie, script-path=https://raw.githubusercontent.com/honue/rules/master/Loon/scripts/115.js, requires-body=false, timeout=10, enable=true
+
+[MITM]
+hostname = passportapi.115.com
+
+
+【Surge】
+-----------------
+[Script]
+115_cookie = type=http-request, pattern=^https:\/\/passportapi\.115\.com\/app\/\d+\.\d+\/[^\/]+\/\d+\.\d+\.\d+\/login_log\/login_devices, script-path=https://raw.githubusercontent.com/honue/rules/master/Loon/scripts/115.js, requires-body=false, timeout=10
+
+[MITM]
+hostname = passportapi.115.com
+
+
+【Quantumult X】
+-----------------
+[rewrite_local]
+^https:\/\/passportapi\.115\.com\/app\/\d+\.\d+\/[^\/]+\/\d+\.\d+\.\d+\/login_log\/login_devices url script-request-header https://raw.githubusercontent.com/honue/rules/master/Loon/scripts/115.js
+
+[mitm]
+hostname = passportapi.115.com
+*/
 
 const $ = new Env("115cookie");
+const throttleKey = '115_cookie_script_ts';
+const throttleWindow = 10 * 1000;
+const now = Date.now();
+const lastRunAt = Number($.getdata(throttleKey) || 0);
 
-// 如果 obj.cookie 存在，将其作为参数传递到 URL 中
-let option = {
-    url: `http://192.168.33.100:3000/api/v1/plugin/Transfer115/update_cookie?plugin_key=moviepilot&cookie=${obj.cookie}`
-};
+if (now - lastRunAt < throttleWindow) {
+  console.log('[115] 脚本执行已跳过：10秒内仅允许一次');
+  return $done({});
+}
 
-// 发送 GET 请求
-$.get(option);
-$.msg('115cookie', '更新成功', obj.cookie);
+$.setdata(String(now), throttleKey);
 
-$done({});
+var requestUrl = $request.url || '';
+var headers = $request.headers || {};
+var rawCookie = headers.cookie || headers.Cookie || '';
+
+if (Array.isArray(rawCookie)) {
+  rawCookie = rawCookie.join('; ');
+} else if (typeof rawCookie !== 'string') {
+  rawCookie = String(rawCookie || '');
+}
+
+var filteredCookie = rawCookie
+  .split(';')
+  .map((item) => item.trim())
+  .filter((item) => /^(UID|CID|SEID)=/.test(item))
+  .join('; ');
+
+console.log('[115] 请求地址: ' + requestUrl);
+console.log('[115] Cookie: ' + filteredCookie);
+
+$.msg('115 Cookie', '获取成功', filteredCookie || '未获取到 UID/CID/SEID');
+
+return $done({});
 
 function Env(name, opts) {
   class Http {

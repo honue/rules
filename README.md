@@ -8,3 +8,7 @@ https://raw.githubusercontent.com/honue/rules/master/Loon/plugin/Douban.plugin
 ```
 https://raw.githubusercontent.com/honue/rules/master/Loon/plugin/FanQieNovel.plugin
 ```
+## 115获取cookie
+```
+https://raw.githubusercontent.com/honue/rules/master/Loon/scripts/115.js
+```
