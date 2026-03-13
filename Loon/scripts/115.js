@@ -56,13 +56,13 @@ if (Array.isArray(rawCookie)) {
 var filteredCookie = rawCookie
   .split(';')
   .map((item) => item.trim())
-  .filter((item) => /^(UID|CID|SEID)=/.test(item))
+  .filter((item) => /^(UID|CID|SEID|KID)=/.test(item))
   .join('; ');
 
 console.log('[115] 请求地址: ' + requestUrl);
 console.log('[115] Cookie: ' + filteredCookie);
 
-$.msg('115 Cookie', '获取成功', filteredCookie || '未获取到 UID/CID/SEID');
+$.msg('115 Cookie', '获取成功', filteredCookie || '未获取到 UID/CID/SEID/KID');
 
 return $done({});
 
